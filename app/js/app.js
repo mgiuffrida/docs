@@ -70,7 +70,6 @@ if (console) {
 
 // Register service worker if supported.
 if ('serviceWorker' in navigator) {
-  console.log('Registering service worker');
   navigator.serviceWorker.register('/service-worker.js');
 }
 

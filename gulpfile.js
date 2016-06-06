@@ -15,7 +15,7 @@ let $ = require('gulp-load-plugins')();
 let matter = require('gulp-gray-matter');
 let styleMod = require('gulp-style-modules');
 let cssslam = require('css-slam');
-var swPrecache = require('sw-precache');
+let swPrecache = require('sw-precache');
 
 let argv = require('yargs').argv;
 let browserSync = require('browser-sync').create();
@@ -84,18 +84,18 @@ function createReloadServer() {
 }
 
 function writeServiceWorkerFile() {
-  var path = require('path');
-  var rootDir = 'dist';
+  let path = require('path');
+  let rootDir = 'dist';
 
-  var config = {
+  let config = {
     cacheId: 'polymerproject',
     staticFileGlobs: [
-      rootDir + '/1.0/index.html',
-      rootDir + '/1.0/about.html',
-      rootDir + '/elements/**',
-      rootDir + '/js/*.js',
-      rootDir + '/css/*.css',
-      rootDir + '/bower_components/**/webcomponents-lite.min.js',
+      `${rootDir}/1.0/index.html`,
+      `${rootDir}/1.0/about.html`,
+      `${rootDir}/elements/**`,
+      `${rootDir}/js/*.js`,
+      `${rootDir}/css/*.css`,
+      `${rootDir}/bower_components/**/webcomponents-lite.min.js`,
     ],
     navigateFallback: '/1.0/index.html',
     runtimeCaching: [
@@ -375,15 +375,12 @@ gulp.task('clean', 'Remove dist/ and other built files', function() {
   return del(['dist', 'app/css']);
 });
 
-gulp.task('generate-service-worker', function() {
-  writeServiceWorkerFile();
-});
-
+gulp.task('generate-service-worker', writeServiceWorkerFile);
 
 // Default task. Build the dest dir.
 gulp.task('default', 'Build site', ['clean', 'jshint'], function(done) {
   runSequence(
-    ['style', 'images', 'vulcanize', 'vulcanize-demos', 'js', ],
+    ['style', 'images', 'vulcanize', 'vulcanize-demos', 'js'],
     'copy', 'md:docs', 'md:blog', 'generate-service-worker',
     done);
 });
