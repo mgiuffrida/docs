@@ -142,7 +142,7 @@ function writeServiceWorkerFile() {
     stripPrefix: rootDir + '/',
     verbose: false  /* When debugging, you can enable this to true  */
   };
-  swPrecache.write(path.join(rootDir, 'service-worker.js'), config);
+  return swPrecache.write(path.join(rootDir, 'service-worker.js'), config);
 }
 
 gulp.task('style', 'Compile sass, autoprefix, and minify CSS', function() {
