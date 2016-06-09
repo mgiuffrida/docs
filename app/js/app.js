@@ -94,7 +94,7 @@ if ('serviceWorker' in navigator) {
         switch (installingWorker.state) {
           case 'installed':
             if (!navigator.serviceWorker.controller) {
-              window.showToast('Caching complete! Future visits will work offline.');
+              window.showToast('Service Worker installed! Pages you view are cached for offline use.');
             }
             break;
 
@@ -113,7 +113,7 @@ if ('serviceWorker' in navigator) {
 if (navigator.serviceWorker && navigator.serviceWorker.controller) {
   navigator.serviceWorker.controller.onstatechange = function(event) {
     if (event.target.state === 'redundant') {
-      window.showToast('A new version of this app is available. Refresh the page.');
+      window.showToast('Site updated. Refresh this page to see the latest content.');
     }
   };
 }
