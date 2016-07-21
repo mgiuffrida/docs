@@ -5,7 +5,7 @@ title: Data binding
 <!-- toc -->
 
 Data binding binds a property or sub-property of a custom element (the _host element_) to
-a property or attribute of an element in its local DOM (the _child_ or _target element_).
+a property, attribute, or text node of an element in its local DOM (the _child_ or _target element_).
 
 A binding is created with a binding _annotation_ in the host element's local DOM template:
 
@@ -17,9 +17,9 @@ A binding is created with a binding _annotation_ in the host element's local DOM
 </dom-module>
 ```
 
-## Binding annotations {#property-binding}
+## Simple binding annotations {#property-binding}
 
-A binding annotation consists of a property name or subproperty name enclosed
+A simple binding annotation consists of a property name or subproperty name enclosed
 in curly brackets (`{{}}`) or square brackets (`[[]]`).
 
 *  Square brackets (`[[]]`) create _one-way bindings_. Data flow is
@@ -29,7 +29,7 @@ in curly brackets (`{{}}`) or square brackets (`[[]]`).
    one-way or two-way, depending whether the target property is configured
    for two-way binding.
 
-To bind to a child property, specify the attribute name that corresponds to the
+To bind to a child's property, specify the attribute name that corresponds to the
 property, with an annotation as the attribute value:
 
 ```
@@ -39,15 +39,14 @@ property, with an annotation as the attribute value:
 This example binds the child element's `name` property to the host element's
 `myName` property.
 
-While HTML attributes are used to specify bindings, values are
+While HTML attributes are used to specify bindings, values are normally
 assigned directly to JavaScript properties, **not** to the HTML attributes of the
 elements. (There is a [special attribute binding syntax](#attribute-binding) for
 those cases where you want to bind to an attribute value.)
 
 Attribute names are mapped to property names as described in [Property name to
 attribute name mapping](properties#property-name-mapping). To
-bind to camel-case properties of elements, use dash-case in the attribute name.
-For example:
+bind to camel-case properties of elements, use dash-case in the attribute name:
 
 ```
 <user-view first-name="{{managerName}}"></user-view>
@@ -92,7 +91,7 @@ Binding to text content is always one-way, host-to-child.
 
 ### Compound bindings {#compound-bindings}
 
-You can combine string literals and bindings in a single property binding or
+You can combine string literals and bindings in a single property binding, attribute binding, or
 text content binding:
 
 ```
@@ -458,9 +457,7 @@ See [Binding to array items](#array-binding).
 Currently there's no general support for expressions in binding annotations.
 The two exceptions are:
 
-*   Negation using `!`:
-
-    Example:
+*   Negation in simple bindings using `!`:
 
     ```
     <template>
