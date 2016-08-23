@@ -44,9 +44,9 @@ Consider a very simple element:
 </dom-module>
 ```
 
-![A name-card element with a property, name. An arrow labeled 1 connects the name property to
-a JavaScript object. An arrow labeled 2 connects the element to a box labeled local DOM tree
-which contains a single element, div. An arrow labeled 3 connects the JavaScript object to the
+![A name-card element with a property, name. An arrow labeled 1 connects the name property to 
+a JavaScript object. An arrow labeled 2 connects the element to a box labeled local DOM tree 
+which contains a single element, div. An arrow labeled 3 connects the JavaScript object to the 
 div element.](/images/1.0/data-system/data-binding-overview-new.png)
 
 1.  The `<name-card>` element has a `name` property that _refers_ to a JavaScript object.
@@ -69,9 +69,9 @@ property:
 The path "`name`" refers to the element's `name` property (an object).The paths "`name.first`" and
 `"name.last"` refer to properties of that object.
 
-![The name-card element from the previous figure. An arrow labeled 1 connects the name property
-to a JavaScript object that contains two properties, first: 'Lizzy' and last: 'Bennet'. Two arrows
-labeled 2 connect the paths name and name.first with the object itself and the subproperty,
+![The name-card element from the previous figure. An arrow labeled 1 connects the name property 
+to a JavaScript object that contains two properties, first: 'Lizzy' and last: 'Bennet'. Two arrows 
+labeled 2 connect the paths name and name.first with the object itself and the subproperty, 
 first, respectively.](/images/1.0/data-system/paths-overview-new.png)
 
 1.  The `name` property refers to the JavaScript object.
@@ -99,13 +99,13 @@ In summary:
 An *observable change* is **a data change that Polymer can associate with a path**. Certain changes
 are automatically *observable*:
 
-*   Setting a *direct property *of the element.
+*   Setting a *direct property* of the element.
 
-   `this.owner = 'Jane';`
+    `this.owner = 'Jane';`
 
-   If a property has any associated property effects (such as observers, computed properties, or
-   data bindings), Polymer creates a setter for the property, which automatically invokes the
-   property effects.
+    If a property has any associated property effects (such as observers, computed properties, or
+    data bindings), Polymer creates a setter for the property, which automatically invokes the
+    property effects.
 
 *   Setting a subproperty of the element using a two-way data binding.
 
@@ -136,7 +136,7 @@ Changes that **imperatively mutate an object or array are *not* observable**. Th
 
     ```js
     // unobservable change using native Array.push
-    this.users.push({ name: 'Maturin});
+    this.users.push({ name: 'Maturin'});
     ```
 
     Mutating the array doesn't invoke the setter on `users`, so it isn't automatically observable.
@@ -197,10 +197,10 @@ In the data system, a _path_ is a string that identifies a property or subproper
 scope*. In most cases, the scope is a host element. For example, consider the following
 relationships:
 
-![Two elements, user-profile and address card. The user-profile element has a primaryAddress
-property. An arrow labeled 1 connects the property to a JavaScript object. The address-card
-element has an address property. An arrow labeled 2 connects the property to the same JavaScript
-object.](/images/1.0/data-system/data-binding-paths.png)
+![Two elements, user-profile and address card. The user-profile element has a primaryAddress 
+property. An arrow labeled 1 connects the property to a JavaScript object. The address-card 
+element has an address property. An arrow labeled 2 connects the property to the same JavaScript 
+object.](/images/1.0/data-system/data-binding-paths-new.png)
 
 1.  The `<user-profile>` element has a property `primaryAddress` that refers to a JavaScript object.
 2.  The `<address-card>` element has a property `address` that refers to the same object.
@@ -247,10 +247,10 @@ If `<address-card>` makes an observable change to the object, property effects a
 
 Paths are relative to the current data binding *scope*.
 
-The topmost scope for any element is the element's properties. Certain data binding helper elements
+The topmost scope for any element consists of the element's properties. Certain data binding helper elements
 (like [template repeaters](/1.0/docs/devguide/templates#dom-repeat)) introduce new, nested scopes.
 
-For observers and computed properties, the scope is always the element's properties.
+For observers and computed properties, the scope is always the element's topmost scope.
 
 ### Special paths
 
@@ -264,7 +264,7 @@ There are a few special types of path segments.
     array mutations.
 *   The string `splices` can be used as the last segment in a path (like `foo.splices`) to represent
     all array mutations to a given array.
-*   Array item paths (like `foo.11`) represent an item in an array.
+*   Array item paths (like `foo.12`) represent an item in an array.
 
 
 
@@ -275,7 +275,7 @@ previous property or its subproperties. For example, if `users` is an array, `us
 interest in any changes to the `users` array or its subproperties.
 
 Wildcard paths are only used in observers, computed properties and computed bindings. You can't use
-a wildcard path in a data binding.
+a wildcard path in a non-computed data binding.
 
 #### Array mutation paths
 
@@ -293,9 +293,9 @@ registered by a wildcard path (for example, you won't see changes to subproperti
 Polymer supports two ways of identifying an array item in a path: by index or by an opaque,
 immutable key.
 
-*   An index, for example, `"myArray.1"` indicates the array item at position 1.
+*   An index; for example, `"myArray.1"` indicates the array item at position 1.
 
-*   An opaque key, prefixed with the pound sign (`#`), for example, `"myArray.#1"` indicates the
+*   An opaque key, prefixed with the pound sign (`#`); for example, `"myArray.#1"` indicates the
     array item with the *key* "1".
 
 **Why use keys?** Polymer uses keys internally to provide a stable path to a specific array item,
@@ -311,7 +311,7 @@ because it requires extra work to retrieve the index. Polymer provides methods t
 original array item given the item's key.
 
 **In most cases, you don't need to deal with array keys directly**. Polymer provides helper
-elements, such as the [template repeater element](/1.0/docs/devguide/templates#dom-repeat) that
+elements such as the [template repeater element](/1.0/docs/devguide/templates#dom-repeat) that
 abstract away many of the complexities of working with arrays.
 
 Related tasks:
@@ -327,7 +327,7 @@ For example, an element has two properties, `users` (an array) and `selectedUser
 a user is selected, `selectedUser` refers one of the objects in the array.
 
 
-![A user-list element and an array with four items labeled \[0\] through \[3\]. The user-list has two properties, users and selectedUser. The users property is connected to the array by an arrow labeled 1. The selectedUser property is connected to the array item, \[1\] by an arrow labeled 2.](/images/1.0/data-system/linked-paths-new.png)
+![A user-list element and an array with four items labeled [0] through [3]. The user-list has two properties, users and selectedUser. The users property is connected to the array by an arrow labeled 1. The selectedUser property is connected to the array item, [1] by an arrow labeled 2.](/images/1.0/data-system/linked-paths-new.png)
 
 1.  The `users` property references the array itself.
 2.  The `selectedUser` property references an item in the array.
@@ -346,16 +346,16 @@ maintains path linkages between an array and a selected item from that array. (`
 also works when selecting multiple items from an array.)
 
 For other use cases, there's an imperative method,
-[`linkPaths`](/1.0/docs/api/Polymer.Base#method-linkPaths) to associate two paths. When two paths
+[`linkPaths`](/1.0/docs/api/Polymer.Base#method-linkPaths), to associate two paths. When two paths
 are *linked*, an [observable change](#observable-changes) to one path is observable on the other
-path, as well.
+path as well.
 
 
-Related task:
+Related tasks:
 
-*   [Link two paths to the same object](model-data#linkpaths)
+*   [Link two paths to the same object](model-data#linkpaths).
 
-*   [Data bind an array selection](templates#array-selector)
+*   [Data bind an array selection](templates#array-selector).
 
 
 
@@ -367,9 +367,9 @@ its local DOM nodes.
 When two elements are connected with a data binding, data changes can flow _downward_, from
 host to target, _upward_, from target to host, or both ways.
 
-When two elements in the local DOM are bound to the same property data appears to flow from one
+When two elements in the local DOM are bound to the same property, data appears to flow from one
 element to the other, but this flow is _mediated_ by the host. A change made by one element
-propagates **up** to the host, then the host propagates the change **down** to the second element.
+propagates **up** to the host; the host then propagates the change **down** to the second element.
 
 ### Data flow is synchronous
 
@@ -629,7 +629,7 @@ Since the host element manages data flow, it can directly interact with the targ
 propagates data downward by setting the target element’s properties or invoking its methods.
 
 
-![An element, host-element connected to an element, target-element by an arrow labeled 1.](/images/1.0/data-system/data-flow-down-new.png)
+![An element (host-element) connected to an element (target-element) by an arrow labeled 1.](/images/1.0/data-system/data-flow-down-new.png)
 
 1.  When a property changes on the host element, it sets the corresponding property on the target
     element, triggering the associated property effects.
@@ -647,7 +647,7 @@ effects may include:
 *   Generating another change event to propagate the change upward.
 
 
-![An element, target-element connected to an element, host-element by an arrow labeled 1. An arrow labeled 2 connects from the host element back to itself.](/images/1.0/data-system/data-flow-up-new.png)
+![An element (target-element) connected to an element (host-element) by an arrow labeled 1. An arrow labeled 2 connects from the host element back to itself.](/images/1.0/data-system/data-flow-up-new.png)
 
 1.  A property change on the target element causes a property change event to fire.
 2.  The host element receives the event and sets the corresponding property, invoking the related
@@ -662,8 +662,8 @@ For object and array properties, data flow is a little more complicated. An obje
 referenced by multiple elements, and there's no way to prevent one element from mutating a shared
 array or changing a subproperty of an object.
 
-As a result, Polymer treats the contents of arrays and objects as always being **available** for two-
-way binding. That is:
+As a result, Polymer treats the contents of arrays and objects as always being **available** for
+two-way binding. That is:
 
 
 *   Data updates always flow downwards, even if the target property is marked read-only.
@@ -698,7 +698,7 @@ The contents of the event vary depending on the change.
 *   For a subproperty change, the _path_ to the subproperty is included in the `detail.path` field,
     and the new value is included in the `detail.value` field.
 *   For an array mutation, the `detail.path` field is an array mutation path, such as
-    "myArray.splices", and the `detail.value`
+    "myArray.splices", and the `detail.value` field includes metadata about the changes.
 
 ### Custom change notification events
 
@@ -723,7 +723,7 @@ changes.
 
 Related tasks:
 
-*   [Two-way bind to a non-Polymer element](data-binding#two-way-native)
+*   [Two-way bind to a non-Polymer element](data-binding#two-way-native).
 
 ### Element initialization
 
@@ -731,7 +731,7 @@ When an element initializes its local DOM, it configures the properties of its l
 initializes data bindings.
 
 The host’s values take priority during initialization. For example, when a host property is bound to
-a target property, if both host and target elements specify default values, the parent's default
+a target property, if both host and target elements specify default values, the host's default
 value is used.
 
 ## Property effects {#property-effects}
@@ -741,7 +741,7 @@ property (or path). Property effects include:
 
 *   Recomputing computed properties.
 *   Updating data bindings.
-*   Reflecting a property value to an attribute on the host element.
+*   Reflecting a property value to an attribute on the element.
 *   Firing change notification events.
 *   Invoking observers.
 
