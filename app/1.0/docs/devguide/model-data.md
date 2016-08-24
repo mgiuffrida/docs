@@ -37,7 +37,7 @@ There are a few special types of path segments.
 *   Wildcard paths (like `foo.*`) represent _all changes to a given path and its subproperties_,
     including array mutations.
 *   Array mutation paths (like `foo.splices`) represent all array mutations to a given array.
-*   Array item paths (like `foo.11`) represent an item in an array.
+*   Array item paths (like `foo.12`) represent an item in an array.
 
 ## Get a value by path {#get-value}
 
@@ -47,8 +47,8 @@ its path.
 ```
 // retrieve a subproperty by path
 var value = this.get('myProp.subProp');
-// Retrieve the 11th item in myArray
-var item = this.get(['myArray', 11])
+// Retrieve the 12th item in myArray
+var item = this.get(['myArray', 12])
 
 ```
 
@@ -82,7 +82,7 @@ this.set('users', this.users);
 Related tasks:
 
 -   [Notify Polymer of a subproperty change](#notify-path).
--   [Notify Polymer of array mutations](#notifysplices)
+-   [Notify Polymer of array mutations](#notifysplices).1
 
 ### Notify Polymer of a subproperty change {#notify-path}
 
